@@ -4,6 +4,11 @@
     python -m agentcanary baseline --version v1 [--out baselines/v1.baseline.json]
     python -m agentcanary drift [--version v1] [--baseline baselines/v1.baseline.json]
 
+`compare` also writes a JSON verdict (default reports/compare-*.json,
+override with --json-out) carrying a run ID and an ISO timestamp. The run
+ID comes from --run-id, else the AGENTCANARY_RUN_ID env var, else a fresh
+minted ID — so an external tracer can correlate this run with other tools.
+
 Exit codes are the CI contract: 0 = PROMOTE / no drift,
 2 = BLOCK, 3 = drift detected.
 """
@@ -12,7 +17,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .report import render_compare, render_drift
@@ -39,6 +47,22 @@ def cmd_compare(args: argparse.Namespace) -> int:
     print(report)
     default_out = f"reports/compare-{args.base}-vs-{args.candidate}.md"
     _write(args.out if args.out is not None else default_out, report)
+    run_id = (
+        args.run_id
+        or os.environ.get("AGENTCANARY_RUN_ID")
+        or f"canary-{uuid.uuid4().hex[:12]}"
+    )
+    verdict = {
+        "run_id": run_id,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "command": "compare",
+        **diff,
+    }
+    default_json_out = f"reports/compare-{args.base}-vs-{args.candidate}.json"
+    _write(
+        args.json_out if args.json_out is not None else default_json_out,
+        json.dumps(verdict, indent=2) + "\n",
+    )
     return 0 if diff["decision"] == "PROMOTE" else 2
 
 
@@ -74,6 +98,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--base", required=True)
     p.add_argument("--candidate", required=True)
     p.add_argument("--out", default=None, help="report path (default reports/compare-*.md)")
+    p.add_argument("--json-out", default=None,
+                   help="JSON verdict path (default reports/compare-*.json)")
+    p.add_argument("--run-id", default=None,
+                   help="run/trace ID for the JSON verdict "
+                        "(default: AGENTCANARY_RUN_ID env var, else a minted ID)")
     p.set_defaults(fn=cmd_compare)
 
     p = sub.add_parser("baseline", help="record a version's suite results as the drift baseline")
