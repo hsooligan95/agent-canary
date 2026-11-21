@@ -1,0 +1,44 @@
+name: agent-canary
+
+# Gate agent behavior changes the way CI gates code changes.
+# Point --candidate at the config your PR introduces; here it defaults
+# to the bundled "v2-good" so the workflow is green out of the box,
+# and red if anyone edits that config into a regression.
+
+on:
+  pull_request:
+    paths:
+      - "agentcanary/configs/**"
+      - "agentcanary/agent.py"
+      - "agentcanary/tasks/**"
+  workflow_dispatch:
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Unit tests (scoring + checks)
+        run: pytest -q
+
+      - name: Golden-suite gate (base v1 vs candidate)
+        # Exits 2 on BLOCK, which fails this job and blocks the PR.
+        run: python -m agentcanary compare --base v1 --candidate v2-good
+
+      - name: Drift check (pinned version vs stored baseline)
+        run: python -m agentcanary drift --version v1
+
+      - name: Upload canary reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentcanary-reports
+          path: reports/
