@@ -1,0 +1,1 @@
+{"description":"The regression case: 'streamlined' prompt that skips the verification step to save tokens. Cheaper per run -- and it updates locked, frozen, stopped and degraded services blind.","name":"v2-bad","planning_tokens":220,"post_verify":false,"step_latency_ms":30,"verify_before_apply":false}

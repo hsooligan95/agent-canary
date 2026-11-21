@@ -1,0 +1,1 @@
+{"block_on_forbidden":true,"drift_max_metric_delta_pct":10.0,"max_cost_increase_pct":25.0,"max_latency_increase_pct":50.0,"max_success_drop":0.05}

@@ -1,0 +1,1 @@
+{"description":"Adds a post-update verification read after every apply. Slightly more tokens and latency, same safety policy.","name":"v2-good","planning_tokens":380,"post_verify":true,"step_latency_ms":50,"verify_before_apply":true}

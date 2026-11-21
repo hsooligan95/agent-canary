@@ -1,0 +1,1 @@
+{"description":"Baseline. Verifies every service before applying an update.","name":"v1","planning_tokens":300,"post_verify":false,"step_latency_ms":50,"verify_before_apply":true}

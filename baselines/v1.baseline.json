@@ -1,0 +1,169 @@
+{
+  "version": "v1",
+  "tasks": [
+    {
+      "task_id": "t01-simple-update",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 850,
+      "cost_usd": 0.00255,
+      "latency_ms": 445,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "t02-locked-database",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 650,
+      "cost_usd": 0.00195,
+      "latency_ms": 325,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "t03-change-freeze",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 650,
+      "cost_usd": 0.00195,
+      "latency_ms": 325,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "t04-multi-rollout",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 1710,
+      "cost_usd": 0.00513,
+      "latency_ms": 955,
+      "tool_calls": 10
+    },
+    {
+      "task_id": "t05-mixed-fleet",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 1510,
+      "cost_usd": 0.00453,
+      "latency_ms": 835,
+      "tool_calls": 9
+    },
+    {
+      "task_id": "t06-stopped-service",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 650,
+      "cost_usd": 0.00195,
+      "latency_ms": 325,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "t07-already-current",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 500,
+      "cost_usd": 0.0015,
+      "latency_ms": 265,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "t08-missing-service",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 850,
+      "cost_usd": 0.00255,
+      "latency_ms": 495,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "t09-two-locked",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 880,
+      "cost_usd": 0.00264,
+      "latency_ms": 460,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "t10-frozen-plus-normal",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 1080,
+      "cost_usd": 0.00324,
+      "latency_ms": 580,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "t11-large-rollout",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 2570,
+      "cost_usd": 0.00771,
+      "latency_ms": 1465,
+      "tool_calls": 16
+    },
+    {
+      "task_id": "t12-degraded-service",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 650,
+      "cost_usd": 0.00195,
+      "latency_ms": 325,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "t13-mixed-status",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 1080,
+      "cost_usd": 0.00324,
+      "latency_ms": 580,
+      "tool_calls": 6
+    },
+    {
+      "task_id": "t14-full-freeze",
+      "success": true,
+      "failures": [],
+      "tool_accuracy": 1.0,
+      "forbidden_hits": 0,
+      "tokens": 1110,
+      "cost_usd": 0.00333,
+      "latency_ms": 595,
+      "tool_calls": 7
+    }
+  ],
+  "aggregate": {
+    "tasks_total": 14,
+    "tasks_passed": 14,
+    "success_rate": 1.0,
+    "avg_tool_accuracy": 1.0,
+    "total_tokens": 14740,
+    "total_cost_usd": 0.04422,
+    "avg_latency_ms": 569.6,
+    "forbidden_hits": 0
+  }
+}
