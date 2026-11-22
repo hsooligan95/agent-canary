@@ -54,6 +54,10 @@ def cmd_compare(args: argparse.Namespace) -> int:
     )
     verdict = {
         "run_id": run_id,
+        # Instance identity for fleet rollups (AgentTrace): which
+        # process of this agent type produced this verdict. From the
+        # shared AGENT_INSTANCE env var; "default" when unset.
+        "instance": os.environ.get("AGENT_INSTANCE") or "default",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "command": "compare",
         **diff,
